@@ -1,34 +1,30 @@
 package controller;
 
-import java.sql.SQLException;
 import java.util.List;
 import model.Catatan;
 import model.CatatanDAO;
 
 public class CatatanController {
-    private CatatanDAO dao;
 
-    public CatatanController() {
-        dao = new CatatanDAO();
+    private CatatanDAO dao = new CatatanDAO();
+
+    public boolean insertCatatan(Catatan c) {
+        return dao.insert(c);
     }
 
-    public List<Catatan> getAllNotes() throws SQLException {
-        return dao.getAllNotes();
+    public boolean updateCatatan(Catatan c) {
+        return dao.update(c);
     }
 
-    public void addNote(String tanggal, String judul, String isi) throws SQLException {
-        dao.addNote(new Catatan(0, tanggal, judul, isi));
+    public boolean deleteCatatan(int id) {
+        return dao.delete(id);
     }
 
-    public void updateNote(int id, String tanggal, String judul, String isi) throws SQLException {
-        dao.updateNote(new Catatan(id, tanggal, judul, isi));
+    public List<Catatan> getAllCatatan() {
+        return dao.getAll();
     }
 
-    public void deleteNote(int id) throws SQLException {
-        dao.deleteNote(id);
-    }
-
-    public List<Catatan> searchNotes(String keyword) throws SQLException {
-        return dao.searchNotes(keyword);
+    public List<Catatan> searchCatatan(String keyword) {
+        return dao.search(keyword);
     }
 }
