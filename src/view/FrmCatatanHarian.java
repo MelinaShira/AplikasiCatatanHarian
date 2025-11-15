@@ -26,7 +26,10 @@ import javax.swing.JFileChooser;
  */
 public class FrmCatatanHarian extends javax.swing.JFrame {
     
+    // Controller untuk menghubungkan Form dengan database melalui DAO
     private CatatanController controller;
+    
+    // Model tabel untuk mengatur isi tabel (header + baris data)
     private DefaultTableModel model;
 
     /**
@@ -40,14 +43,15 @@ public class FrmCatatanHarian extends javax.swing.JFrame {
         txtIsi.setLineWrap(true);
         txtIsi.setWrapStyleWord(true);
 
-        // Buat model tabel
+        // Membuat model tabel beserta nama kolomnya
         model = new DefaultTableModel(
                 new Object[]{"No", "Tanggal", "Judul", "Isi Catatan"}, 0
         );
-        tblCatatan.setModel(model);
+        tblCatatan.setModel(model);  // Menghubungkan model ke JTable
 
-        loadData();
+        loadData();  // Memuat data dari database ke tabel saat form dibuka
         
+        // Event: ketika baris tabel dipilih, tampilkan datanya ke form input
         tblCatatan.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting() && tblCatatan.getSelectedRow() != -1) {
                 tampilkanDataKeForm();
